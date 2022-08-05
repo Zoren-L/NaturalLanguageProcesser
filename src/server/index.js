@@ -2,11 +2,11 @@
 pData = {}
 
 //Global Variables
-const app = express()
+var path = require('path');
+const express = require('express');
+const app = express();
 
-var path = require('path')
-const express = require('express')
-app.use(express.static('dist'))
+app.use(express.static('dist'));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -19,16 +19,15 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // const mockAPIResponse = require('./mockAPI.js')
+const apiKey = process.env.API_KEY;
 
+console.log(`Your API key is ${apiKey}`);
 
-console.log(`Your API key is ${process.env.API_KEY}`);
-
-console.log(__dirname)
+console.log(__dirname);
 
 
 app.get('/', function (req, res) {
-    // res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('src/client/views/index.html'))
+    res.sendFile('dist/index.html');
 })
 
 
@@ -37,25 +36,24 @@ app.listen(8888, function () {
     console.log('Example app listening on port 8888!')
 })
 
-const apiKey = process.env.API_KEY;
 
 //Post data
-app.get('/all', getData);
+app.get('/retrieve', getData);
 function getData(req, res) {
   res.send(pData);
   console.log(pData);
 };
 
 //Post Data
-app.post("/postData", postData)
+app.post("/submitData", postData)
 function postData(req, res) {
-    pData = {
+    newData = {
         //Do We need these? Or can we just use 'text'
         agreement: req.body.agreement,
         confidence: req.body.confidence,
-        score: req.body.score_tag
+        score_tag: req.body.score_tag
     }
-    res.send(pData);
+    pData = newData;
     console.log(pData);
 }
 

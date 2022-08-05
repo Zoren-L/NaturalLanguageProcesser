@@ -6,10 +6,10 @@ function handleSubmit(event) {
     event.preventDefault()
 
     // check the text
-    let formText = document.getElementById('name').value
+    let formText = document.getElementById('name').value;
 
     if (Client.checkIsNotEmpty(formText) === false){
-        alert('Form is empty, please fill form with text before submitting')
+        alert('Form is empty, please fill form with text before submitting');
         return false
     }
     else {
@@ -17,16 +17,17 @@ function handleSubmit(event) {
         getCheckedText(baseURL, formText, apiKey)
         .then(function(data){
             console.log(data)
-            handleText('/submitData', {confidence: data.confidence, agreement: data.agreement, score: data.score_tag});
+            handleText('/submitData', {confidence: data.confidence, agreement: data.agreement, score_tag: data.score_tag});
         })
-        .then(updateUI());
+        .then(function() {
+          updateUI()
+        });
     }
 }
 
 //Action 3: Check what text was input into the form
 const getCheckedText = async (baseURL, formText, key)=> {
     const res = await fetch(`${baseURL}${key}&txt=${formText}&lang=en`);
-    console.log(response);
     try {
       const data = await res.json();
       console.log(data);
@@ -60,10 +61,13 @@ const handleText = async ( url = '', data = {})=>{
 }
 
 const updateUI = async () => {
-  const request = await fetch('/send');
+  const request = await fetch('/retrieve');
   try{
     const values = await request.json();
-    document.getElementById('results').innerHTML = `Confidence: ${values.confidence} Agreement: ${values.agreement} Score: ${values.score}`;
+    console.log(values);
+    document.getElementById('results').innerHTML = `Agreement: ${values.agreement} 
+                                                    <br></br> Confidence: ${values.confidence} 
+                                                    <br></br> Score: ${values.score_tag}`;
   } catch(error) {
     console.log("Ui failed to update", error);
   }

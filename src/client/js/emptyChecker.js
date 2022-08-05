@@ -1,10 +1,9 @@
 function checkIsNotEmpty(inputText) {
     console.log("::: Running checkIsNotEmpty :::", inputText);
     
-    const value = inputText.value.trim();
+    let value = inputText.trim();
 
-    if(value.length > 0) {
-        alert("Valid Input given");
+    if(value.length >= 0) {
         return true;
     } else return false;
 }
