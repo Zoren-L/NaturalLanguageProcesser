@@ -18,7 +18,7 @@ app.use(cors());
 const dotenv = require('dotenv');
 dotenv.config();
 
-// const mockAPIResponse = require('./mockAPI.js')
+const mockAPIResponse = require('./mockAPI.js')
 const apiKey = process.env.API_KEY;
 
 console.log(`Your API key is ${apiKey}`);
@@ -37,7 +37,7 @@ app.listen(8888, function () {
 })
 
 
-//Post data
+//Get
 app.get('/retrieve', getData);
 function getData(req, res) {
   res.send(pData);

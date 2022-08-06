@@ -25,7 +25,7 @@ function handleSubmit(event) {
     }
 }
 
-//Action 3: Check what text was input into the form
+//Check what text was input into the form and request from Api
 const getCheckedText = async (baseURL, formText, key)=> {
     const res = await fetch(`${baseURL}${key}&txt=${formText}&lang=en`);
     try {
@@ -38,7 +38,7 @@ const getCheckedText = async (baseURL, formText, key)=> {
     }
 }
 
-//Action 4: post data to server
+// Post data to server
 /* Function to POST data */
 const handleText = async ( url = '', data = {})=>{
       const response = await fetch(url, {
@@ -60,6 +60,7 @@ const handleText = async ( url = '', data = {})=>{
     }
 }
 
+//Update UI
 const updateUI = async () => {
   const request = await fetch('/retrieve');
   try{

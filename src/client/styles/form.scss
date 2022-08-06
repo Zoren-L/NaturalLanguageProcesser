@@ -1,8 +1,16 @@
+@import "sassVariables";
+
 form {
     border: 1px solid #545454;
     border-radius: 3px;
-    padding: 40px;
+    padding: $form-padding;
+    color: $primary-color;
 }
+
+form-box {
+    background-color: $form-color;
+}
+
 
 input {
     padding: 5px 20px;

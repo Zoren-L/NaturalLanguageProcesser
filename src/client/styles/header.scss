@@ -1,5 +1,8 @@
+@import "sassVariables";
+
 header {
     display: flex;
     justify-content: space-between;
-    padding: 10px 40px;
+    padding: $padded-spacing;
+    font: $font-stack;
 }

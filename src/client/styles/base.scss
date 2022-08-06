@@ -1,7 +1,11 @@
+@import "sassVariables";
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font: $font-stack;
+    background-color: $window-color;
 }
 
 main {
